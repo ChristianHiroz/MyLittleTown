@@ -9,8 +9,8 @@ import java.util.ArrayList;
 public class Route {
     public int posX; // Utilisé pour représentation graphique
     public int posY; // Utilisé pour représentation graphique
-    public boolean occupe;
-    public ArrayList<Route> nextPortions; // Le ou les portions de route suivante.
+    private boolean occupe;
+    public ArrayList<Route> nextPortions; // Le ou les portions de route suivante(s).
 
     public Route(int xPos, int yPos) {
         this.posX = posX;
@@ -18,31 +18,31 @@ public class Route {
         occupe = false;
         nextPortions = new ArrayList<Route>();
     }
-    /* Fonction pour connaître si une portion est égale à une autre
-    * Utile si stockée dans un Set
-    */
-    public boolean equals(Route otherRoute) {
-        if (this.posX == otherRoute.posX)
-            return true;
-        else if (this.posY == otherRoute.posY)
-            return true;
-        else return false;
-    }
-    /* Fonction pour connaître si une portion est égale à une autre */
-    public boolean equals(int posX, int posY) {
-        if (this.posX == posX)
-            return true;
-        else if (this.posY == posY)
-            return true;
-        else return false;
+
+    public boolean isOccupe() {
+        return occupe;
     }
 
     public synchronized void occuperRoute() {
         occupe = true;
     }
 
-    public synchronized Route deplacer() {
+    public synchronized void liberRoute() {
         occupe = false;
-        return nextPortions.get(((int)Math.random() * 10) % nextPortions.size());
+    }
+
+    public synchronized ArrayList<Route> getNextPortions() {
+        return nextPortions;
+    }
+
+    /* Fonction pour connaître si une portion est égale à une autre
+    * Utile si stockée dans un Set
+    */
+    public boolean equalsTo(Route otherRoute) {
+        if (this.posX == otherRoute.posX)
+            return true;
+        else if (this.posY == otherRoute.posY)
+            return true;
+        else return false;
     }
 }

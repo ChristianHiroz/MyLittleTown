@@ -10,7 +10,7 @@ public class Route {
     public int posX; // Utilisé pour représentation graphique
     public int posY; // Utilisé pour représentation graphique
     private boolean occupe;
-    public ArrayList<Route> nextPortions; // Le ou les portions de route suivante.
+    public ArrayList<Route> nextPortions; // Le ou les portions de route suivante(s).
 
     public Route(int xPos, int yPos) {
         this.posX = posX;
@@ -38,7 +38,7 @@ public class Route {
     /* Fonction pour connaître si une portion est égale à une autre
     * Utile si stockée dans un Set
     */
-    public boolean equals(Route otherRoute) {
+    public boolean equalsTo(Route otherRoute) {
         if (this.posX == otherRoute.posX)
             return true;
         else if (this.posY == otherRoute.posY)

@@ -9,7 +9,7 @@ import java.util.ArrayList;
 public class Route {
     public int posX; // Utilisé pour représentation graphique
     public int posY; // Utilisé pour représentation graphique
-    public boolean occupe;
+    private boolean occupe;
     public ArrayList<Route> nextPortions; // Le ou les portions de route suivante.
 
     public Route(int xPos, int yPos) {
@@ -18,6 +18,23 @@ public class Route {
         occupe = false;
         nextPortions = new ArrayList<Route>();
     }
+
+    public boolean isOccupe() {
+        return occupe;
+    }
+
+    public synchronized void occuperRoute() {
+        occupe = true;
+    }
+
+    public synchronized void liberRoute() {
+        occupe = false;
+    }
+
+    public synchronized ArrayList<Route> getNextPortions() {
+        return nextPortions;
+    }
+
     /* Fonction pour connaître si une portion est égale à une autre
     * Utile si stockée dans un Set
     */
@@ -27,22 +44,5 @@ public class Route {
         else if (this.posY == otherRoute.posY)
             return true;
         else return false;
-    }
-    /* Fonction pour connaître si une portion est égale à une autre */
-    public boolean equals(int posX, int posY) {
-        if (this.posX == posX)
-            return true;
-        else if (this.posY == posY)
-            return true;
-        else return false;
-    }
-
-    public synchronized void occuperRoute() {
-        occupe = true;
-    }
-
-    public synchronized Route deplacer() {
-        occupe = false;
-        return nextPortions.get(((int)Math.random() * 10) % nextPortions.size());
     }
 }

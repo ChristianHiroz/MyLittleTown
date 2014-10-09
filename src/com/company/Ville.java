@@ -1,6 +1,6 @@
 package com.company;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Created by Pony on 09/10/2014. With IntelliJ

@@ -16,7 +16,9 @@ public class Route {
         this.posY = posY;
         nextPortions = new ArrayList<Route>();
     }
-
+    /* Fonction pour connaître si une portion est égale à une autre
+    * Utile si stockée dans un Set
+    */
     public boolean equals(Route otherRoute) {
         if (this.posX == otherRoute.posX)
             return true;
@@ -24,7 +26,7 @@ public class Route {
             return true;
         else return false;
     }
-
+    /* Fonction pour connaître si une portion est égale à une autre */
     public boolean equals(int posX, int posY) {
         if (this.posX == posX)
             return true;

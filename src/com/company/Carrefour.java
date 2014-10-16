@@ -11,14 +11,14 @@ public class Carrefour {
     }
 
     public void addRoute(Route route) {
-        sorties.insertAfterActual(route);
+        sorties.add(route);
     }
 
     public Route turn() {
         do {
-            sorties.goToNextElement();
-        }while (!((Route)sorties.getActualElementData()).isOccupe());
+            sorties.next();
+        } while (((Route)sorties.get()).isOccupe());
 
-        return (Route)sorties.getActualElementData();
+        return (Route)sorties.get();
     }
 }

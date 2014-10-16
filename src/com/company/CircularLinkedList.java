@@ -13,11 +13,15 @@ class CircularLinkedList {
         return (numberOfElements == 0);
     }
 
-    public int getNumberOfElements() {
+    public int lenght() {
         return numberOfElements;
     }
 
-    public void insertFirst(Object data) {
+    public void add(Object data ){
+        insertAfterActual(data);
+    }
+
+    private void insertFirst(Object data) {
         if (!(isEmpty())) {
             index++;
         }
@@ -26,13 +30,13 @@ class CircularLinkedList {
         numberOfElements++;
     }
 
-    public void insertAfterActual(Object data) {
+    private void insertAfterActual(Object data) {
         ListNode listNode = new ListNode(data, actualElement.next);
         actualElement.next = listNode;
         numberOfElements++;
     }
 
-    public boolean deleteFirst() {
+    private boolean deleteFirst() {
         if (isEmpty())
             return false;
         if (index > 0)
@@ -42,7 +46,7 @@ class CircularLinkedList {
         return true;
     }
 
-    public boolean deleteActualElement() {
+    private boolean deleteActualElement() {
         if (index > 0) {
             numberOfElements--;
             index--;
@@ -60,7 +64,7 @@ class CircularLinkedList {
         }
     }
 
-    public boolean goToNextElement() {
+    public boolean next() {
         if (isEmpty())
             return false;
         index = (index + 1) % numberOfElements;
@@ -71,11 +75,11 @@ class CircularLinkedList {
         return true;
     }
 
-    public Object getActualElementData() {
+    public Object get() {
         return actualElement.data;
     }
 
-    public void setActualElementData(Object data) {
+    private void setActualElementData(Object data) {
         actualElement.data = data;
     }
 }

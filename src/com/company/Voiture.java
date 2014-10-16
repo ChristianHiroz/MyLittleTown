@@ -1,7 +1,5 @@
 package com.company;
 
-import java.util.ArrayList;
-
 /**
  * Created by axeleroy on 09/10/2014.
  */
@@ -18,13 +16,10 @@ public class Voiture extends Thread {
     }
 
     public synchronized void deplacer() {
-        ArrayList<Route> prochainesPortions = routeActuelle.getNextPortions();
+        Route prochaineRoute = routeActuelle.getNextPortion();
 
-        for (Route r : prochainesPortions) {
-            if (!r.isOccupe()) {
-                routeActuelle = r;
-                r.occuperRoute();
-            }
+        if (prochaineRoute.isOccupe() != true) {
+            routeActuelle = prochaineRoute;
         }
     }
 }

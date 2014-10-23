@@ -3,7 +3,7 @@ package com.company;
 /**
  * Created by Pony on 09/10/2014. With IntelliJ
  */
-public class Carrefour extends AbstractRoute {
+public class Carrefour {
     private CircularLinkedList sorties;
     private int nbVoitures;
 
@@ -11,34 +11,29 @@ public class Carrefour extends AbstractRoute {
         sorties = new CircularLinkedList();
     }
 
-    @Override
-    public void setSuivant(AbstractRoute route) {
+    public void setSuivant(Portion route) {
         sorties.add(route);
     }
 
-    @Override
     public boolean isOccupe() {
         if (nbVoitures < sorties.length()) {
             return false;
         } else return true;
     }
 
-    @Override
     public void occuperRoute() {
         nbVoitures++;
     }
 
-    @Override
     public void libererRoute() {
         nbVoitures--;
     }
 
-    @Override
-    public AbstractRoute suivant() {
+    public Portion suivant() {
         do {
             sorties.next();
-        } while (((AbstractRoute)sorties.get()).isOccupe());
+        } while (((Portion)sorties.get()).isOccupe());
 
-        return (AbstractRoute)sorties.get();
+        return (Portion)sorties.get();
     }
 }

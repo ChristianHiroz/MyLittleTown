@@ -1,20 +1,19 @@
 package com.company;
 
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by Pony on 09/10/2014. With IntelliJ
  */
 public class Ville {
 
-    public ArrayList<Route> routes;
+    public ArrayList<Portion> routes;
 
     public Ville()
      {
-        routes=new ArrayList<Route>();
+        routes=new ArrayList<Portion>();
       }
-    public void ajouterRoute(Route r)
+    public void ajouterRoute(Portion r)
     {
         this.routes.add(r);
     }

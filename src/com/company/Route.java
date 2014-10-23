@@ -1,22 +1,53 @@
 package com.company;
 
-import java.util.List;
-
 /**
- * Created by Pony on 23/10/2014. With IntelliJ
+ * Created by axeleroy on 09/10/2014.
+ * Modèle de donnée représentant une portion de route
  */
 public class Route extends AbstractRoute{
-    private List<PortionRoute> route;
+    private boolean occupe;
+    private AbstractRoute suivant;
 
-    public Route(List<PortionRoute> route) {
-        this.route = route;
+    public Route(AbstractRoute route) {
+        occupe = false;
+        suivant = route;
     }
 
-    public List<PortionRoute> getRoute() {
-        return route;
+    @Override
+    public AbstractRoute suivant() {
+        return suivant;
     }
 
-    public void setRoute(List<PortionRoute> route) {
-        this.route = route;
+    public void setSuivant(AbstractRoute route) {
+        suivant = route;
+    }
+
+    public boolean isOccupe() {
+        return occupe;
+    }
+
+    public void occuperRoute() {
+        occupe = true;
+    }
+
+    public void liberRoute() {
+        occupe = false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Route that = (Route) o;
+
+        if (occupe != that.occupe) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return (occupe ? 1 : 0);
     }
 }

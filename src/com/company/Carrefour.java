@@ -5,20 +5,22 @@ package com.company;
  */
 public class Carrefour extends AbstractRoute {
     private CircularLinkedList sorties;
+    private int
 
     public Carrefour() {
         sorties = new CircularLinkedList();
     }
 
-    public void addRoute(PortionRoute portionRoute) {
-        sorties.add(portionRoute);
+    public void addRoute(Route route) {
+        sorties.add(route);
     }
 
-    public PortionRoute turn() {
+    @Override
+    public Route suivant() {
         do {
             sorties.next();
-        } while (((PortionRoute)sorties.get()).isOccupe());
+        } while (((Route)sorties.get()).isOccupe());
 
-        return (PortionRoute)sorties.get();
+        return (Route)sorties.get();
     }
 }

@@ -4,10 +4,10 @@ package com.company;
  * Created by axeleroy on 09/10/2014.
  */
 public class Voiture extends Thread {
-    private PortionRoute portionRouteActuelle;
+    private Route routeActuelle;
 
-    public Voiture(PortionRoute portionRoute) {
-        portionRouteActuelle = portionRoute;
+    public Voiture(Route route) {
+        routeActuelle = route;
     }
 
     @Override
@@ -16,10 +16,10 @@ public class Voiture extends Thread {
     }
 
     public synchronized void deplacer() {
-        PortionRoute prochainePortionRoute = portionRouteActuelle.getNextPortion();
+        Route prochaineRoute = routeActuelle.getNextPortion();
 
-        if (prochainePortionRoute.isOccupe() != true) {
-            portionRouteActuelle = prochainePortionRoute;
+        if (prochaineRoute.isOccupe() != true) {
+            routeActuelle = prochaineRoute;
         }
     }
 }

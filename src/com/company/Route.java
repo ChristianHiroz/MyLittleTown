@@ -22,15 +22,18 @@ public class Route extends AbstractRoute{
         suivant = route;
     }
 
+    @Override
     public boolean isOccupe() {
         return occupe;
     }
 
+    @Override
     public void occuperRoute() {
         occupe = true;
     }
 
-    public void liberRoute() {
+    @Override
+    public void libererRoute() {
         occupe = false;
     }
 

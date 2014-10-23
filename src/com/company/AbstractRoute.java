@@ -5,4 +5,8 @@ package com.company;
  */
 public abstract class AbstractRoute {
     public abstract AbstractRoute suivant();
+    public abstract boolean isOccupe();
+    public abstract void occuperRoute();
+    public abstract void libererRoute();
+    public abstract void setSuivant(AbstractRoute route);
 }

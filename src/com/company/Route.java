@@ -18,6 +18,7 @@ public class Route extends AbstractRoute{
         return suivant;
     }
 
+    @Override
     public void setSuivant(AbstractRoute route) {
         suivant = route;
     }

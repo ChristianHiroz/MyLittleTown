@@ -11,6 +11,7 @@ public class Carrefour extends AbstractRoute {
         sorties = new CircularLinkedList();
     }
 
+    @Override
     public void setSuivant(AbstractRoute route) {
         sorties.add(route);
     }

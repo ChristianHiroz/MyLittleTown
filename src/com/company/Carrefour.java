@@ -3,7 +3,7 @@ package com.company;
 /**
  * Created by Pony on 09/10/2014. With IntelliJ
  */
-public class Carrefour {
+public class Carrefour extends AbstractRoute {
     private CircularLinkedList sorties;
 
     public Carrefour() {

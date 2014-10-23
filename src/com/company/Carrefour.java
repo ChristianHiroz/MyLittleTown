@@ -10,15 +10,15 @@ public class Carrefour {
         sorties = new CircularLinkedList();
     }
 
-    public void addRoute(Route route) {
-        sorties.add(route);
+    public void addRoute(PortionRoute portionRoute) {
+        sorties.add(portionRoute);
     }
 
-    public Route turn() {
+    public PortionRoute turn() {
         do {
             sorties.next();
-        } while (((Route)sorties.get()).isOccupe());
+        } while (((PortionRoute)sorties.get()).isOccupe());
 
-        return (Route)sorties.get();
+        return (PortionRoute)sorties.get();
     }
 }

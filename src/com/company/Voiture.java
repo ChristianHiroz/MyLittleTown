@@ -4,9 +4,9 @@ package com.company;
  * Created by axeleroy on 09/10/2014.
  */
 public class Voiture extends Thread {
-    private Route routeActuelle;
+    private AbstractRoute routeActuelle;
 
-    public Voiture(Route route) {
+    public Voiture(AbstractRoute route) {
         routeActuelle = route;
     }
 
@@ -16,10 +16,12 @@ public class Voiture extends Thread {
     }
 
     public synchronized void deplacer() {
-        Route prochaineRoute = routeActuelle.getNextPortion();
+        AbstractRoute prochaineRoute = routeActuelle.suivant();
 
         if (prochaineRoute.isOccupe() != true) {
+            routeActuelle.libererRoute();
             routeActuelle = prochaineRoute;
+            routeActuelle.occuperRoute();
         }
     }
 }

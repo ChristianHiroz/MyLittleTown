@@ -13,7 +13,7 @@ class CircularLinkedList {
         return (numberOfElements == 0);
     }
 
-    public int lenght() {
+    public int length() {
         return numberOfElements;
     }
 

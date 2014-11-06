@@ -8,12 +8,11 @@ public class Portion{
     private boolean occupe;
     private Portion suivant;
 
-    public Portion(Portion route) {
+    public Portion() {
         occupe = false;
-        suivant = route;
     }
 
-    public Portion suivant() {
+    public Portion getSuivant() {
         return suivant;
     }
 

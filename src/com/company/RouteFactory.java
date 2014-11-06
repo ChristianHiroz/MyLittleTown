@@ -43,7 +43,9 @@ public class RouteFactory {
         return route;
     }
 
-    public Face createFace(Route route, int cote) {
-        return new Face(route.getEntree(cote), route.getSortie(cote));
+    public void connectRoute(Route route0, int sens0, Route route1, int sens1) {
+        Face face1 = new Face(route0.getEntree(sens0), route1.getSortie(sens1));
+        Face face2 = new Face(route1.getEntree(sens1), route0.getSortie(sens0));
+        face1.connect(face2);
     }
 }

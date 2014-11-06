@@ -19,14 +19,25 @@ public class RouteFactory {
     public Route createRoute(int longueur) {
         Route route = new Route();
 
-        for (int i = 0; i < longueur; i ++) {
-            Portion portion = new Portion();
-            route.addRoute(0, portion);
-        }
+        Portion prevPortion = null;
 
         for (int i = 0; i < longueur; i ++) {
             Portion portion = new Portion();
+            route.addRoute(0, portion);
+            if (prevPortion != null) {
+                portion.setSuivant(prevPortion);
+            }
+            prevPortion = portion;
+        }
+
+        prevPortion = null;
+        for (int i = 0; i < longueur; i ++) {
+            Portion portion = new Portion();
             route.addRoute(1, portion);
+            if (prevPortion != null) {
+                portion.setSuivant(prevPortion);
+            }
+            prevPortion = portion;
         }
 
         return route;

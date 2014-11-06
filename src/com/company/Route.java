@@ -6,41 +6,41 @@ import java.util.ArrayList;
  * Created by axeleroy on 06/11/2014.
  */
 public class Route {
-    private ArrayList<Portion> route0;
-    private ArrayList<Portion> route1;
+    private ArrayList<Portion> voie0;
+    private ArrayList<Portion> voie1;
 
     Route() {
-        route0 = new ArrayList<Portion>();
-        route1 = new ArrayList<Portion>();
+        voie0 = new ArrayList<Portion>();
+        voie1 = new ArrayList<Portion>();
     }
 
     public void addRoute(int route, Portion portion) throws IllegalArgumentException {
         if (route == 0) {
-            route0.add(portion);
+            voie0.add(portion);
         } else if (route == 2) {
-            route1.add(portion);
+            voie1.add(portion);
         } else {
             throw new IllegalArgumentException("Parameter route is " + route + "instead of 0 or 1");
         }
     }
 
-    public Portion getEntree(int sens){
-        if (sens == 0) {
-            return route1.get(0);
+    public Portion getEntree(int voie){
+        if (voie == 0) {
+            return voie1.get(0);
         }
-        else if (sens == 1) {
-            return route0.get(0);
+        else if (voie == 1) {
+            return voie0.get(0);
         } else {
             return null;
         }
     }
 
-    public Portion getSortie(int sens){
-        if (sens == 0) {
-            return route1.get(route1.size()-1);
+    public Portion getSortie(int voie){
+        if (voie == 0) {
+            return voie1.get(voie1.size()-1);
         }
-        else if (sens == 1) {
-            return route0.get(route0.size()-1);
+        else if (voie == 1) {
+            return voie0.get(voie0.size()-1);
         } else {
             return null;
         }

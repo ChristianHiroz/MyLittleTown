@@ -42,4 +42,8 @@ public class RouteFactory {
 
         return route;
     }
+
+    public Face createFace(Route route, int cote) {
+        return new Face(route.getEntree(cote), route.getSortie(cote));
+    }
 }

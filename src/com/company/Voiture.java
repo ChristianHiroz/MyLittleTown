@@ -14,11 +14,27 @@ public class Voiture extends Thread {
     @Override
     public void run() {
         System.out.println(routeActuelle);
-        deplacer();
+        try {
+            deplacer();
+            System.out.println("Avance");
+        } catch (PortionOccupedException pooe) {
+            try {
+                System.out.println("Bouchon");
+                sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            try {
+                deplacer();
+                System.out.println("Avance");
+            } catch (PortionOccupedException e) {
+                e.printStackTrace();
+            }
+        }
         System.out.println(routeActuelle);
     }
 
-    public synchronized void deplacer() {
+    public synchronized void deplacer() throws PortionOccupedException {
         Portion prochaineRoute = routeActuelle.getSuivants()
             .get((int) Math.random() * 10 % routeActuelle.getSuivants().size());
 
@@ -26,6 +42,8 @@ public class Voiture extends Thread {
             routeActuelle.libererRoute();
             routeActuelle = prochaineRoute;
             routeActuelle.occuperRoute();
+        } else {
+            throw new PortionOccupedException("La route suivante est occupée");
         }
     }
 }

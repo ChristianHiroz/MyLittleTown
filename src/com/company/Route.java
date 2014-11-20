@@ -1,13 +1,14 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by axeleroy on 06/11/2014.
  */
 public class Route {
-    private ArrayList<Portion> voie0;
-    private ArrayList<Portion> voie1;
+    private List<Portion> voie0;
+    private List<Portion> voie1;
 
     Route() {
         voie0 = new ArrayList<Portion>();
@@ -44,5 +45,12 @@ public class Route {
         } else {
             return null;
         }
+    }
+
+    public Face getFace(int voie) throws IllegalArgumentException {
+        if (voie != 0 && voie != 1) {
+            throw new IllegalArgumentException("Parameter voie is " + voie + " instead of 0 or 1");
+        }
+        return new Face(getEntree(voie), getSortie(1 - voie));
     }
 }

@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by axeleroy on 09/10/2014.
@@ -8,14 +9,14 @@ import java.util.ArrayList;
  */
 public class Portion{
     private boolean occupe;
-    private ArrayList<Portion> suivants;
+    private List<Portion> suivants;
 
     public Portion() {
         occupe = false;
         suivants = new ArrayList<Portion>();
     }
 
-    public ArrayList<Portion> getSuivants() {
+    public List<Portion> getSuivants() {
         return suivants;
     }
 

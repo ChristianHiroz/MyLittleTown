@@ -10,12 +10,29 @@ import java.util.List;
 public class Portion{
     private boolean occupe;
     private List<Portion> suivants;
+    private boolean stationService;
+
 
     public Portion() {
         occupe = false;
         suivants = new ArrayList<Portion>();
+        this.stationService = false;
     }
 
+    public Portion(boolean stationService) {
+        occupe = false;
+        suivants = new ArrayList<Portion>();
+        this.stationService = stationService;
+    }
+
+
+    public boolean isStationService() {
+        return stationService;
+    }
+
+    public void setStationService(boolean stationService) {
+        this.stationService = stationService;
+    }
     public List<Portion> getSuivants() {
         return suivants;
     }

@@ -4,9 +4,9 @@ package com.company;
  * Created by axeleroy on 09/10/2014.
  */
 public class Voiture extends Thread {
-    private AbstractRoute routeActuelle;
+    private Portion routeActuelle;
 
-    public Voiture(AbstractRoute route) {
+    public Voiture(Portion route) {
         routeActuelle = route;
     }
 
@@ -16,7 +16,8 @@ public class Voiture extends Thread {
     }
 
     public synchronized void deplacer() {
-        AbstractRoute prochaineRoute = routeActuelle.suivant();
+        Portion prochaineRoute = routeActuelle.getSuivants()
+            .get((int)Math.random() * 10 % routeActuelle.getSuivants().size());
 
         if (prochaineRoute.isOccupe() != true) {
             routeActuelle.libererRoute();

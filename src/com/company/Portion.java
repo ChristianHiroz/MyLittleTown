@@ -8,18 +8,18 @@ import java.util.ArrayList;
  */
 public class Portion{
     private boolean occupe;
-    private ArrayList<Portion> suivant;
+    private ArrayList<Portion> suivants;
 
     public Portion() {
         occupe = false;
     }
 
-    public ArrayList<Portion> getSuivant() {
-        return suivant;
+    public ArrayList<Portion> getSuivants() {
+        return suivants;
     }
 
     public void addSuivant(Portion route) {
-        this.suivant.add(route);
+        this.suivants.add(route);
     }
 
     public boolean isOccupe() {

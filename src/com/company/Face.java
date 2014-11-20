@@ -29,7 +29,7 @@ public class Face {
     }
 
     public void connect(Face cacher){
-        cacher.getSortie().setSuivant(this.getEntree());
-        this.getSortie().setSuivant(cacher.getEntree());
+        cacher.getSortie().addSuivant(this.getEntree());
+        this.getSortie().addSuivant(cacher.getEntree());
     }
 }

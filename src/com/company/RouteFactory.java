@@ -25,7 +25,7 @@ public class RouteFactory {
             Portion portion = new Portion();
             route.addRoute(0, portion);
             if (prevPortion != null) {
-                portion.setSuivant(prevPortion);
+                portion.addSuivant(prevPortion);
             }
             prevPortion = portion;
         }
@@ -35,7 +35,7 @@ public class RouteFactory {
             Portion portion = new Portion();
             route.addRoute(1, portion);
             if (prevPortion != null) {
-                portion.setSuivant(prevPortion);
+                portion.addSuivant(prevPortion);
             }
             prevPortion = portion;
         }

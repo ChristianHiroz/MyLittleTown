@@ -12,32 +12,29 @@ public class RouteFactory {
 
     }
 
-    public RouteFactory getInstance() {
+    public static RouteFactory getInstance() {
         return RouteFactoryHolder.INSTANCE;
     }
 
     public Route createRoute(int longueur) {
         Route route = new Route();
 
-        Portion prevPortion = null;
+        Portion firstPortion = new Portion();
 
         for (int i = 0; i < longueur; i ++) {
             Portion portion = new Portion();
-            route.addRoute(0, portion);
-            if (prevPortion != null) {
-                portion.addSuivant(prevPortion);
-            }
-            prevPortion = portion;
+            route.addRoute(0, firstPortion);
+            firstPortion.addSuivant(portion);
+            firstPortion = portion;
         }
 
-        prevPortion = null;
+        firstPortion = new Portion();
+
         for (int i = 0; i < longueur; i ++) {
             Portion portion = new Portion();
-            route.addRoute(1, portion);
-            if (prevPortion != null) {
-                portion.addSuivant(prevPortion);
-            }
-            prevPortion = portion;
+            route.addRoute(1, firstPortion);
+            firstPortion.addSuivant(portion);
+            firstPortion = portion;
         }
 
         return route;

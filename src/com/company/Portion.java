@@ -12,6 +12,7 @@ public class Portion{
 
     public Portion() {
         occupe = false;
+        suivants = new ArrayList<Portion>();
     }
 
     public ArrayList<Portion> getSuivants() {
@@ -32,6 +33,14 @@ public class Portion{
 
     public void libererRoute() {
         occupe = false;
+    }
+
+    @Override
+    public String toString() {
+        if (occupe)
+            return "Je suis occupé et mon suivant est " + suivants;
+        else return "Je suis libre";
+
     }
 
 }

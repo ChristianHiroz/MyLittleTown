@@ -17,10 +17,10 @@ public class Route {
     public void addRoute(int route, Portion portion) throws IllegalArgumentException {
         if (route == 0) {
             voie0.add(portion);
-        } else if (route == 2) {
+        } else if (route == 1) {
             voie1.add(portion);
         } else {
-            throw new IllegalArgumentException("Parameter route is " + route + "instead of 0 or 1");
+            throw new IllegalArgumentException("Parameter route is " + route + " instead of 0 or 1");
         }
     }
 

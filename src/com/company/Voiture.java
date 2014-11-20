@@ -13,11 +13,12 @@ public class Voiture extends Thread {
     @Override
     public void run() {
         deplacer();
+        System.out.println(routeActuelle);
     }
 
     public synchronized void deplacer() {
         Portion prochaineRoute = routeActuelle.getSuivants()
-            .get((int)Math.random() * 10 % routeActuelle.getSuivants().size());
+            .get((int) Math.random() * 10 % routeActuelle.getSuivants().size());
 
         if (prochaineRoute.isOccupe() != true) {
             routeActuelle.libererRoute();

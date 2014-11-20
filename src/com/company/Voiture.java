@@ -14,21 +14,19 @@ public class Voiture extends Thread {
     @Override
     public void run() {
         System.out.println(routeActuelle);
-        try {
-            deplacer();
-            System.out.println("Avance");
-        } catch (PortionOccupedException pooe) {
-            try {
-                System.out.println("Bouchon");
-                sleep(100);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
+        boolean isDeplacer = false;
+        while(!isDeplacer){
             try {
                 deplacer();
                 System.out.println("Avance");
-            } catch (PortionOccupedException e) {
-                e.printStackTrace();
+                isDeplacer = true;
+            } catch (PortionOccupedException pooe) {
+                try {
+                    System.out.println("Bouchon");
+                    sleep(100);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
             }
         }
         System.out.println(routeActuelle);

@@ -26,8 +26,8 @@ public class Main {
 
         Voiture v0 = new Voiture(r0.getEntree(0));
         Voiture v1 = new Voiture(r0.getEntree(0).getSuivants().get(0));
-        v0.run();
-        v1.run();
+        v0.start();
+        v1.start();
 
 
 

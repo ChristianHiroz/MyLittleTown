@@ -25,7 +25,9 @@ public class Main {
         f30.connect(f01);
 
         Voiture v0 = new Voiture(r0.getEntree(0));
+        Voiture v1 = new Voiture(r0.getSortie(0));
         v0.run();
+        v1.run();
 
 
 

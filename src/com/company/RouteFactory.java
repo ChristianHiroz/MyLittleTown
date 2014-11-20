@@ -21,10 +21,13 @@ public class RouteFactory {
 
         Portion firstPortion = new Portion();
 
+
         for (int i = 0; i < longueur; i ++) {
             Portion portion = new Portion();
             route.addRoute(0, firstPortion);
-            firstPortion.addSuivant(portion);
+            if (i < longueur - 1) {
+                firstPortion.addSuivant(portion);
+            }
             firstPortion = portion;
         }
 
@@ -33,7 +36,9 @@ public class RouteFactory {
         for (int i = 0; i < longueur; i ++) {
             Portion portion = new Portion();
             route.addRoute(1, firstPortion);
-            firstPortion.addSuivant(portion);
+            if (i < longueur - 1) {
+                firstPortion.addSuivant(portion);
+            }
             firstPortion = portion;
         }
 

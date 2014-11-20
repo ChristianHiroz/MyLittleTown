@@ -8,10 +8,12 @@ public class Voiture extends Thread {
 
     public Voiture(Portion route) {
         routeActuelle = route;
+        route.occuperRoute();
     }
 
     @Override
     public void run() {
+        System.out.println(routeActuelle);
         deplacer();
         System.out.println(routeActuelle);
     }

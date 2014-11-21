@@ -103,13 +103,13 @@ public class Voiture extends Thread {
                     this.remettreEssence();
                     System.out.println("Refull !!");
                 }
-                long tempsAttente = 1000 / (long)this.vitesse; // gestion vitesse (1000 = arrêt, donc 1000/vitesse donne le temps de parcours d'une portion)
+                long tempsAttente = 10000 / (long)this.vitesse; // gestion vitesse (1000 = arrêt, donc 1000/vitesse donne le temps de parcours d'une portion)
                 sleep(tempsAttente);
             } catch (PortionOccupedException pooe) {
                 try {
                     arretVoiture();
                     System.out.println("Bouchon");
-                    sleep(1000);
+                    sleep(10000);
                 } catch (InterruptedException e) {
                     try {
                         arretVoiture(true);

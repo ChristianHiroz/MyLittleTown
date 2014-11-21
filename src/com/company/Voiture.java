@@ -130,6 +130,29 @@ public class Voiture extends Thread {
     }
 
     public synchronized void deplacer() throws PortionOccupedException {
+        Portion prochaineRoute = choisirRoute();
+
+        if (!prochaineRoute.isOccupe()) {
+            this.alterationVoiture();
+            this.changementRoute(prochaineRoute);
+        } else {
+            throw new PortionOccupedException("La route suivante est occupée");
+
+        }
+    }
+
+    private void alterationVoiture(){
+        augmenterVitesse();
+        diminuerEssence();
+    }
+
+    private void changementRoute(Portion prochaineRoute) {
+        routeActuelle.libererRoute();
+        routeActuelle = prochaineRoute;
+        routeActuelle.occuperRoute();
+    }
+    
+    private Portion choisirRoute() {
         Portion prochaineRoute = null;
         for(Comportement comportement : comportements) {
             if (comportement == Comportement.ESSENCE) {
@@ -155,16 +178,8 @@ public class Voiture extends Thread {
                 prochaineRoute = choixRouteAleatoire();
             }
         }
-        if (prochaineRoute.isOccupe() != true) {
-            augmenterVitesse();
-            diminuerEssence();
-            routeActuelle.libererRoute();
-            routeActuelle = prochaineRoute;
-            routeActuelle.occuperRoute();
-        } else {
-            throw new PortionOccupedException("La route suivante est occupée");
 
-        }
+        return prochaineRoute;
     }
     //endregion
 }

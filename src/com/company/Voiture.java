@@ -75,8 +75,17 @@ public class Voiture extends Thread {
 
     public void diminuerEssence(){
         this.essence--;
-        if(this.essence == MAXESSENCE /10) {
+        if(this.essence == MAXESSENCE /10 && !this.comportements.contains(Comportement.ESSENCE)) {
             this.comportements.add(Comportement.ESSENCE);
+        }
+        if(this.comportements.contains(Comportement.ESSENCE) && this.essence == 0) {
+            try {
+                sleep(25000);
+                arretVoiture();
+                System.out.println("Panne d'essence");
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -131,13 +140,21 @@ public class Voiture extends Thread {
 
     public synchronized void deplacer() throws PortionOccupedException {
         Portion prochaineRoute = choisirRoute();
-
         if (!prochaineRoute.isOccupe()) {
             this.alterationVoiture();
             this.changementRoute(prochaineRoute);
         } else {
             throw new PortionOccupedException("La route suivante est occupée");
-
+        }
+        if (this.routeActuelle.isStationService() && this.comportements.contains(Comportement.LIVREUR)) {
+            try{
+                System.out.println("Livraison en cours");
+                arretVoiture();
+                sleep(15000);
+            }
+            catch(InterruptedException e) {
+                System.out.println("Livraison annulée");
+            }
         }
     }
 

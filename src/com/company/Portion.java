@@ -10,29 +10,33 @@ import java.util.List;
 public class Portion{
     private boolean occupe;
     private List<Portion> suivants;
-    private boolean stationService;
+    private boolean stationService = false;
+    private boolean lieuLivraison = false;
 
 
     public Portion() {
         occupe = false;
         suivants = new ArrayList<Portion>();
-        this.stationService = false;
     }
 
-    public Portion(boolean stationService) {
+    public Portion(ElementRoute elementRoute) {
         occupe = false;
         suivants = new ArrayList<Portion>();
-        this.stationService = stationService;
+        setElementRoute(elementRoute);
     }
-
 
     public boolean isStationService() {
         return stationService;
     }
 
-    public void setStationService(boolean stationService) {
-        this.stationService = stationService;
+    public void setElementRoute(ElementRoute elementRoute) {
+        if(elementRoute == ElementRoute.STATIONSERVICE){
+            this.stationService = true;
+        } else if (elementRoute == ElementRoute.LIEULIVRAISON) {
+            this.lieuLivraison = true;
+        }
     }
+
     public List<Portion> getSuivants() {
         return suivants;
     }

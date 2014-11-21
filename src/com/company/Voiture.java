@@ -124,7 +124,7 @@ public class Voiture extends Thread {
         System.out.println(routeActuelle);
     }
 
-    public Portion choixRouteAleatoire(){
+    private Portion choixRouteAleatoire(){
         return this.routeActuelle.getSuivants()
                 .get((int) Math.random() * 10 % routeActuelle.getSuivants().size());
     }
@@ -151,7 +151,7 @@ public class Voiture extends Thread {
         routeActuelle = prochaineRoute;
         routeActuelle.occuperRoute();
     }
-    
+
     private Portion choisirRoute() {
         Portion prochaineRoute = null;
         for(Comportement comportement : comportements) {

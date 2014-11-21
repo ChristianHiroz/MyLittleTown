@@ -6,35 +6,59 @@ import java.util.ArrayList;
  * Created by axeleroy on 09/10/2014.
  */
 public class Voiture extends Thread {
-    static final int VITESSEMAX = 50;
-    static final int ACCELERATION = 10;
-    static final int MAXESSENCE = 500;
+    //region Variable de classe
+    private int MAXESSENCE = 500;
+    //endregion
 
+    //region Propriétés
     private Portion routeActuelle;
     private int vitesse = 0;
     private int essence;
-    private Comportement comportement;
+    private ArrayList<Comportement> comportements;
+    private int vitesseMax = 50;
+    private int acceleration = 10;
+    //endregion
 
+    //region Constructeurs
     public Voiture(Portion route) {
         routeActuelle = route;
         route.occuperRoute();
-        this.comportement = Comportement.DEFAULT;
+        this.comportements = new ArrayList<Comportement>();
+        this.addComportement(Comportement.DEFAULT);
         this.essence = MAXESSENCE;
     }
 
     public Voiture(Portion route, Comportement comportement) {
         routeActuelle = route;
         route.occuperRoute();
-        this.comportement = comportement;
+        this.comportements = new ArrayList<Comportement>();
+        this.addComportement(comportement);
         this.essence = MAXESSENCE;
+    }
+    //endregion
+
+    //region Getter/Setter
+    public void addComportement(Comportement comportement) {
+        if(comportement == Comportement.CHAUFFARD) {
+            this.vitesseMax += 20;
+            this.acceleration += 5;
+        } else if (comportement == Comportement.TOURISTE) {
+            this.vitesseMax -= 10;
+            this.acceleration -= 5;
+        } else if (comportement == Comportement.VIEUX) {
+            this.acceleration -= 5;
+        } else if (comportement == Comportement.PRESSER) {
+            this.acceleration += 5;
+        }
+        this.comportements.add(comportement);
     }
 
     public void augmenterVitesse () {
-        if(this.vitesse + ACCELERATION <= VITESSEMAX){
-            this.vitesse=+ACCELERATION;
+        if(this.vitesse + acceleration <= vitesseMax){
+            this.vitesse=+acceleration;
         }
-        else if (this.vitesse + ACCELERATION > VITESSEMAX && this.vitesse < VITESSEMAX) {
-            this.vitesse=VITESSEMAX;
+        else if (this.vitesse + acceleration > vitesseMax && this.vitesse < vitesseMax) {
+            this.vitesse= vitesseMax;
         }
     }
 
@@ -42,38 +66,59 @@ public class Voiture extends Thread {
         this.vitesse = 0;
     }
 
+    public void arretVoiture(boolean fin) throws FinException {
+        this.vitesse = 0;
+        if(fin) {
+            throw new FinException();
+        }
+    }
+
     public void diminuerEssence(){
         this.essence--;
         if(this.essence == MAXESSENCE /10) {
-            this.comportement = Comportement.ESSENCE;
+            this.comportements.add(Comportement.ESSENCE);
         }
     }
 
     public void remettreEssence() {
         this.essence = MAXESSENCE;
+        for(Comportement comportement : comportements) {
+            if(comportement == Comportement.ESSENCE) {
+                this.comportements.remove(comportements.indexOf(comportement));
+            }
+        }
     }
+    //endregion
 
+    //region Méthodes
     @Override
     public void run() {
         System.out.println(routeActuelle);
-        boolean isDeplacer = false;
-        while(!isDeplacer){
+        boolean fin = false;
+        while(!fin){
             try {
                 deplacer();
                 System.out.println("Avance");
-                isDeplacer = true;
                 if(routeActuelle.isStationService()){
                     this.remettreEssence();
                     System.out.println("Refull !!");
                 }
+                long tempsAttente = 1000 / (long)this.vitesse; // gestion vitesse (1000 = arrêt, donc 1000/vitesse donne le temps de parcours d'une portion)
+                sleep(tempsAttente);
             } catch (PortionOccupedException pooe) {
                 try {
                     arretVoiture();
                     System.out.println("Bouchon");
-                    sleep(100);
+                    sleep(1000);
                 } catch (InterruptedException e) {
-                    e.printStackTrace();
+                    try {
+                        arretVoiture(true);
+                    } catch (FinException e1) {
+                        System.out.println("Fin de la démonstration !");
+                    }
                 }
+            } catch (InterruptedException e) {
+                System.out.println("Accident ?");
             }
         }
         System.out.println(routeActuelle);
@@ -86,27 +131,29 @@ public class Voiture extends Thread {
 
     public synchronized void deplacer() throws PortionOccupedException {
         Portion prochaineRoute = null;
-        if(comportement == Comportement.ESSENCE){
-            boolean stationVue = false;
-            boolean intersection = false;
-            for(Portion portion : routeActuelle.getSuivants()) {
-                while (!stationVue && !intersection) {
-                    if (portion.isStationService()) {
-                        stationVue = true;
-                        prochaineRoute = portion;
-                    }
-                    if (portion.getSuivants().size() == 1) {
-                        portion = portion.getSuivants().get(0);
-                    } else {
-                        intersection = true;
+        for(Comportement comportement : comportements) {
+            if (comportement == Comportement.ESSENCE) {
+                boolean stationVue = false;
+                boolean intersection = false;
+                for (Portion portion : routeActuelle.getSuivants()) {
+                    while (!stationVue && !intersection) {
+                        if (portion.isStationService()) {
+                            stationVue = true;
+                            prochaineRoute = portion;
+                        }
+                        if (portion.getSuivants().size() == 1) {
+                            portion = portion.getSuivants().get(0);
+                        } else {
+                            intersection = true;
+                        }
                     }
                 }
-            }
-            if(prochaineRoute == null) {
+                if (prochaineRoute == null) {
+                    prochaineRoute = choixRouteAleatoire();
+                }
+            } else {
                 prochaineRoute = choixRouteAleatoire();
             }
-        } else {
-            prochaineRoute = choixRouteAleatoire();
         }
         if (prochaineRoute.isOccupe() != true) {
             augmenterVitesse();
@@ -119,4 +166,5 @@ public class Voiture extends Thread {
 
         }
     }
+    //endregion
 }

@@ -28,8 +28,8 @@ public class Face {
         this.sortie = sortie;
     }
 
-    public void connect(Face cacher){
-        cacher.getSortie().addSuivant(this.getEntree());
-        this.getSortie().addSuivant(cacher.getEntree());
+    public void connect(Face face){
+        face.getSortie().addSuivant(this.getEntree());
+        this.getSortie().addSuivant(face.getEntree());
     }
 }

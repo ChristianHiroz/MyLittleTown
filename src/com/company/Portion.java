@@ -8,33 +8,58 @@ import java.util.List;
  * Modèle de donnée représentant une portion de route
  */
 public class Portion{
+    //region Propriétés
     private boolean occupe;
     private List<Portion> suivants;
-    private boolean stationService = false;
-    private boolean lieuLivraison = false;
+    private ArrayList<ElementRoute> elements;
+    //endregion
 
-
+    //region Constructeur
     public Portion() {
         occupe = false;
         suivants = new ArrayList<Portion>();
+        elements = new ArrayList<ElementRoute>();
     }
 
     public Portion(ElementRoute elementRoute) {
         occupe = false;
         suivants = new ArrayList<Portion>();
-        setElementRoute(elementRoute);
+        elements = new ArrayList<ElementRoute>();
+        addElement(elementRoute);
     }
 
-    public boolean isStationService() {
-        return stationService;
+    public Portion(ArrayList<ElementRoute> elementRoute) {
+        occupe = false;
+        suivants = new ArrayList<Portion>();
+        elements = elementRoute;
     }
+    //endregion
 
-    public void setElementRoute(ElementRoute elementRoute) {
-        if(elementRoute == ElementRoute.STATIONSERVICE){
-            this.stationService = true;
-        } else if (elementRoute == ElementRoute.LIEULIVRAISON) {
-            this.lieuLivraison = true;
+    //region Getter/Setter
+    public boolean isStationService(){
+        if(this.elements.contains(ElementRoute.STATIONSERVICE)){
+            return true;
         }
+
+        return false;
+    }
+
+    public boolean isLieuLivraison(){
+        if(this.elements.contains(ElementRoute.LIEULIVRAISON)){
+            return true;
+        }
+
+        return false;
+    }
+
+    public void addElement(ElementRoute elementRoute) {
+        if(!this.elements.contains(elementRoute)){
+            this.elements.add(elementRoute);
+        }
+    }
+
+    public ArrayList<ElementRoute> getElements(){
+        return this.elements;
     }
 
     public List<Portion> getSuivants() {
@@ -56,7 +81,9 @@ public class Portion{
     public void libererRoute() {
         occupe = false;
     }
+    //endregion
 
+    //region Méthodes
     @Override
     public String toString() {
         if (occupe)
@@ -64,5 +91,6 @@ public class Portion{
         else return "Je suis libre";
 
     }
+    //endregion
 
 }

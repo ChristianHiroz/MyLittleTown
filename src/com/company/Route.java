@@ -9,10 +9,12 @@ import java.util.List;
 public class Route {
     private List<Portion> voie0;
     private List<Portion> voie1;
+    private String name;
 
-    Route() {
+    Route(String name) {
         voie0 = new ArrayList<Portion>();
         voie1 = new ArrayList<Portion>();
+        this.name = name;
     }
 
     public void addRoute(int route, Portion portion) throws IllegalArgumentException {
@@ -52,5 +54,10 @@ public class Route {
             throw new IllegalArgumentException("Parameter voie is " + voie + " instead of 0 or 1");
         }
         return new Face(getEntree(voie), getSortie(1 - voie));
+    }
+
+    @Override
+    public String toString(){
+        return this.name;
     }
 }

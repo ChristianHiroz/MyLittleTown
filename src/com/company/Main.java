@@ -15,15 +15,13 @@ public class Main {
         r2.getFace(0).connect(r3.getFace(1));
         r3.getFace(0).connect(r0.getFace(1));
 
-        Voiture v0 = new Voiture(r0.getEntree(0), Comportement.CHAUFFARD);
-        Voiture v1 = new Voiture(r0.getEntree(0).getSuivants().get(0), Comportement.TOURISTE);
+        Voiture v0 = new Voiture(r0.getEntree(0), Comportement.CHAUFFARD, "Gerard", r0);
+        Voiture v1 = new Voiture(r0.getEntree(0).getSuivants().get(0), Comportement.TOURISTE, "Jacky", r0);
         v0.start();
         v1.start();
-        v0.join();
-        v1.join();
 
-
-
-
+        Thread.sleep(120000);
+        System.out.println("End of prog... Exiting");
+        System.exit(0);
     }
 }

@@ -7,33 +7,39 @@ import java.util.ArrayList;
  */
 public class Voiture extends Thread {
     //region Variable de classe
-    private int MAXESSENCE = 500;
+    private static final int MAXESSENCE = 500;
     //endregion
 
     //region Propriétés
     private Portion routeActuelle;
+    private String nomConducteur;
     private int vitesse = 0;
     private int essence;
     private ArrayList<Comportement> comportements;
     private int vitesseMax = 50;
     private int acceleration = 10;
+    private Route voieActuelle;
     //endregion
 
     //region Constructeurs
-    public Voiture(Portion route) {
+    public Voiture(Portion route, String nomConducteur, Route voieActuelle) {
         routeActuelle = route;
+        this.nomConducteur = nomConducteur;
         route.occuperRoute();
         this.comportements = new ArrayList<Comportement>();
         this.addComportement(Comportement.DEFAULT);
         this.essence = MAXESSENCE;
+        this.voieActuelle = voieActuelle;
     }
 
-    public Voiture(Portion route, Comportement comportement) {
+    public Voiture(Portion route, Comportement comportement, String nomConducteur, Route voieActuelle) {
         routeActuelle = route;
+        this.nomConducteur = nomConducteur;
         route.occuperRoute();
         this.comportements = new ArrayList<Comportement>();
         this.addComportement(comportement);
         this.essence = MAXESSENCE;
+        this.voieActuelle = voieActuelle;
     }
     //endregion
 
@@ -55,7 +61,7 @@ public class Voiture extends Thread {
 
     public void augmenterVitesse () {
         if(this.vitesse + acceleration <= vitesseMax){
-            this.vitesse=+acceleration;
+            this.vitesse+=acceleration;
         }
         else if (this.vitesse + acceleration > vitesseMax && this.vitesse < vitesseMax) {
             this.vitesse= vitesseMax;
@@ -107,7 +113,7 @@ public class Voiture extends Thread {
         while(!fin){
             try {
                 deplacer();
-                System.out.println("Avance");
+                System.out.println(this.toString() + "... j'avance sur la route " + voieActuelle.toString());
                 if(routeActuelle.isStationService()){
                     this.remettreEssence();
                     System.out.println("Refull !!");
@@ -117,7 +123,7 @@ public class Voiture extends Thread {
             } catch (PortionOccupedException pooe) {
                 try {
                     arretVoiture();
-                    System.out.println("Bouchon");
+                    System.out.println(this.toString() + "... il y a un bouchon sur la route " + voieActuelle.toString());
                     sleep(10000);
                 } catch (InterruptedException e) {
                     try {
@@ -197,6 +203,16 @@ public class Voiture extends Thread {
         }
 
         return prochaineRoute;
+    }
+
+    @Override
+    public String toString(){
+        String toReturn = this.nomConducteur + ": Je roule à " + this.vitesse + "km/h. Je suis ";
+        for(Comportement c : comportements) {
+            toReturn += c.toString() + ", ";
+        }
+
+        return  toReturn;
     }
     //endregion
 }

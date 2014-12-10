@@ -8,8 +8,20 @@ public class RouteFactory {
         private static final RouteFactory INSTANCE = new RouteFactory();
     }
 
-    private RouteFactory() {
+    private String[] lesNoms = new String[11];
 
+    private RouteFactory() {
+        this.lesNoms[0] = "Avenue du Lapin Doré";
+        this.lesNoms[1] = "Rue du Lapin Brillant";
+        this.lesNoms[2] = "Boulevard du Cassoulet";
+        this.lesNoms[3] = "Avenue de la Cuisse";
+        this.lesNoms[4] = "Rue du BonBouchon";
+        this.lesNoms[5] = "Avenue des Pincettes Rondes";
+        this.lesNoms[6] = "Boulard PorteJartelle";
+        this.lesNoms[7] = "Rue de la Guimauve";
+        this.lesNoms[8] = "Rue 404";
+        this.lesNoms[9] = "Chemin de la Pinta";
+        this.lesNoms[10] = "Place Domino";
     }
 
     public static RouteFactory getInstance() {
@@ -17,7 +29,7 @@ public class RouteFactory {
     }
 
     public Route createRoute(int longueur) {
-        Route route = new Route();
+        Route route = new Route(this.lesNoms[(int)Math.random() * 10]);
 
         Portion firstPortion = new Portion();
 

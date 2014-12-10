@@ -21,4 +21,9 @@ public class Feu {
             etat = EtatFeu.VERT;
         }
     }
+
+    @Override
+    public String toString() {
+        return etat.toString();
+    }
 }

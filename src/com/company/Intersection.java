@@ -1,6 +1,5 @@
 package com.company;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -9,7 +8,7 @@ import java.util.List;
 public class Intersection {
     private List<Face> faces;
 
-    public Intersection(ArrayList<Face> f, GestionnaireFeux g) {
+    public Intersection(List<Face> f, GestionnaireFeux g) {
         faces = f;
 
         for (int i = 0; i < faces.size(); i++) {

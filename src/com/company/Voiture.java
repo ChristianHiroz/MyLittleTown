@@ -103,6 +103,7 @@ public class Voiture extends Thread {
     //endregion
 
     //region Méthodes
+    // TODO: Mondifier la méthode run() afin de gérer les feux rouges
     @Override
     public void run() {
         boolean fin = false;

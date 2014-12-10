@@ -14,4 +14,13 @@ public enum EtatFeu {
             return VERT;
         }
     }
+
+    @Override
+    public String toString() {
+        if (this.equals(VERT)) {
+            return "Feu vert";
+        } else {
+            return "Feu rouge";
+        }
+    }
 }

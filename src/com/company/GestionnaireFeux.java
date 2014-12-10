@@ -27,6 +27,11 @@ public class GestionnaireFeux extends Thread {
     public void run() {
         for(;;) {
             permute();
+
+            for (Feu f : feux) {
+                System.out.println(f);
+            }
+
             try {
                 sleep(5000);
             } catch (InterruptedException ie) {

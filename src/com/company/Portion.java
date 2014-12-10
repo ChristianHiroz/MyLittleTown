@@ -12,24 +12,32 @@ public class Portion{
     private boolean occupe;
     private List<Portion> suivants;
     private ArrayList<ElementRoute> elements;
+    private String name;
+    private int num;
     //endregion
 
     //region Constructeur
-    public Portion() {
+    public Portion(String name, int num) {
         occupe = false;
+        this.name = name;
+        this.num = num;
         suivants = new ArrayList<Portion>();
         elements = new ArrayList<ElementRoute>();
     }
 
-    public Portion(ElementRoute elementRoute) {
+    public Portion(ElementRoute elementRoute, String name, int num) {
         occupe = false;
+        this.name = name;
+        this.num = num;
         suivants = new ArrayList<Portion>();
         elements = new ArrayList<ElementRoute>();
         addElement(elementRoute);
     }
 
-    public Portion(ArrayList<ElementRoute> elementRoute) {
+    public Portion(ArrayList<ElementRoute> elementRoute, String name, int num) {
         occupe = false;
+        this.name = name;
+        this.num = num;
         suivants = new ArrayList<Portion>();
         elements = elementRoute;
     }
@@ -86,10 +94,7 @@ public class Portion{
     //region Méthodes
     @Override
     public String toString() {
-        if (occupe)
-            return "Je suis occupé et mon suivant est " + suivants;
-        else return "Je suis libre";
-
+        return this.name + " au numéro: " + this.num;
     }
     //endregion
 

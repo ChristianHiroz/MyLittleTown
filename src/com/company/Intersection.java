@@ -7,7 +7,7 @@ public class Intersection {
     Portion entree;
 
     public Intersection() {
-        entree = new Portion();
+
     }
 
     public void ajouterFace(Face face) {

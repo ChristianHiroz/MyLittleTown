@@ -18,28 +18,25 @@ public class Voiture extends Thread {
     private ArrayList<Comportement> comportements;
     private int vitesseMax = 50;
     private int acceleration = 10;
-    private Route voieActuelle;
     //endregion
 
     //region Constructeurs
-    public Voiture(Portion route, String nomConducteur, Route voieActuelle) {
+    public Voiture(Portion route, String nomConducteur) {
         routeActuelle = route;
         this.nomConducteur = nomConducteur;
         route.occuperRoute();
         this.comportements = new ArrayList<Comportement>();
         this.addComportement(Comportement.DEFAULT);
         this.essence = MAXESSENCE;
-        this.voieActuelle = voieActuelle;
     }
 
-    public Voiture(Portion route, Comportement comportement, String nomConducteur, Route voieActuelle) {
+    public Voiture(Portion route, Comportement comportement, String nomConducteur) {
         routeActuelle = route;
         this.nomConducteur = nomConducteur;
         route.occuperRoute();
         this.comportements = new ArrayList<Comportement>();
         this.addComportement(comportement);
         this.essence = MAXESSENCE;
-        this.voieActuelle = voieActuelle;
     }
     //endregion
 
@@ -108,12 +105,11 @@ public class Voiture extends Thread {
     //region Méthodes
     @Override
     public void run() {
-        System.out.println(routeActuelle);
         boolean fin = false;
         while(!fin){
             try {
                 deplacer();
-                System.out.println(this.toString() + "... j'avance sur la route " + voieActuelle.toString());
+                System.out.println(this.toString() + "... j'avance sur la route " + routeActuelle.toString());
                 if(routeActuelle.isStationService()){
                     this.remettreEssence();
                     System.out.println("Refull !!");
@@ -123,7 +119,7 @@ public class Voiture extends Thread {
             } catch (PortionOccupedException pooe) {
                 try {
                     arretVoiture();
-                    System.out.println(this.toString() + "... il y a un bouchon sur la route " + voieActuelle.toString());
+                    System.out.println(this.toString() + "... il y a un bouchon sur la route " + routeActuelle.toString());
                     sleep(10000);
                 } catch (InterruptedException e) {
                     try {

@@ -8,34 +8,21 @@ public class RouteFactory {
         private static final RouteFactory INSTANCE = new RouteFactory();
     }
 
-    private String[] lesNoms = new String[11];
-
     private RouteFactory() {
-        this.lesNoms[0] = "Avenue du Lapin Doré";
-        this.lesNoms[1] = "Rue du Lapin Brillant";
-        this.lesNoms[2] = "Boulevard du Cassoulet";
-        this.lesNoms[3] = "Avenue de la Cuisse";
-        this.lesNoms[4] = "Rue du BonBouchon";
-        this.lesNoms[5] = "Avenue des Pincettes Rondes";
-        this.lesNoms[6] = "Boulard PorteJartelle";
-        this.lesNoms[7] = "Rue de la Guimauve";
-        this.lesNoms[8] = "Rue 404";
-        this.lesNoms[9] = "Chemin de la Pinta";
-        this.lesNoms[10] = "Place Domino";
     }
 
     public static RouteFactory getInstance() {
         return RouteFactoryHolder.INSTANCE;
     }
 
-    public Route createRoute(int longueur) {
-        Route route = new Route(this.lesNoms[(int)Math.random() * 10]);
-
-        Portion firstPortion = new Portion();
-
+    public Route createRoute(int longueur, String routeName) {
+        int numero = 2;
+        Route route = new Route(routeName);
+        Portion firstPortion = new Portion(routeName, numero);
 
         for (int i = 0; i < longueur; i ++) {
-            Portion portion = new Portion();
+            numero += 2;
+            Portion portion = new Portion(routeName, numero);
             route.addRoute(0, firstPortion);
             if (i < longueur - 1) {
                 firstPortion.addSuivant(portion);
@@ -43,17 +30,18 @@ public class RouteFactory {
             firstPortion = portion;
         }
 
-        firstPortion = new Portion();
+        numero -= 3;
+        firstPortion = new Portion(routeName, numero);
 
         for (int i = 0; i < longueur; i ++) {
-            Portion portion = new Portion();
+            numero -= 2;
+            Portion portion = new Portion(routeName, numero);
             route.addRoute(1, firstPortion);
             if (i < longueur - 1) {
                 firstPortion.addSuivant(portion);
             }
             firstPortion = portion;
         }
-
         return route;
     }
 

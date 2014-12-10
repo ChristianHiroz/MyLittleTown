@@ -12,6 +12,8 @@ public class Portion{
     private boolean occupe;
     private List<Portion> suivants;
     private ArrayList<ElementRoute> elements;
+    private Signalisation signalisation;
+    private Feu feu;
     //endregion
 
     //region Constructeur
@@ -37,25 +39,29 @@ public class Portion{
 
     //region Getter/Setter
     public boolean isStationService(){
-        if(this.elements.contains(ElementRoute.STATIONSERVICE)){
-            return true;
-        }
-
-        return false;
+        return elements.contains(ElementRoute.STATIONSERVICE);
     }
 
     public boolean isLieuLivraison(){
-        if(this.elements.contains(ElementRoute.LIEULIVRAISON)){
-            return true;
-        }
+        return elements.contains(ElementRoute.LIEULIVRAISON);
+    }
 
-        return false;
+    public Feu getFeu() {
+        return feu;
+    }
+
+    public void setFeu(Feu feu) {
+        this.feu = feu;
     }
 
     public void addElement(ElementRoute elementRoute) {
         if(!this.elements.contains(elementRoute)){
             this.elements.add(elementRoute);
         }
+    }
+
+    public void setSignalisation(Signalisation sign) {
+        signalisation = sign;
     }
 
     public ArrayList<ElementRoute> getElements(){

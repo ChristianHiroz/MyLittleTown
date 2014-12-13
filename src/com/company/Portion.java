@@ -54,8 +54,12 @@ public class Portion{
         return elements.contains(ElementRoute.LIEULIVRAISON);
     }
 
-    public Feu getFeu() {
-        return feu;
+    public boolean isFeuRouge() {
+        if (feu != null) {
+            return feu.estRouge();
+        } else {
+            return false;
+        }
     }
 
     public void setFeu(Feu feu) {

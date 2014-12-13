@@ -129,6 +129,13 @@ public class Voiture extends Thread {
                         System.out.println("Fin de la démonstration !");
                     }
                 }
+            } catch (FeuRougeException fre) {
+                arretVoiture();
+                System.out.println(this.toString() + "... le feu est rouge");
+                while(routeActuelle.isFeuRouge()) {
+                    // attente
+                }
+                // TODO : relancer la voiture une fois le feu vert
             } catch (InterruptedException e) {
                 System.out.println("Accident ?");
             }
@@ -141,7 +148,11 @@ public class Voiture extends Thread {
                 .get((int) Math.random() * 10 % routeActuelle.getSuivants().size());
     }
 
-    public synchronized void deplacer() throws PortionOccupedException {
+    public synchronized void deplacer() throws PortionOccupedException, FeuRougeException {
+        if (routeActuelle.isFeuRouge()) {
+            throw new FeuRougeException("Le feu est rouge");
+        }
+
         Portion prochaineRoute = choisirRoute();
         if (!prochaineRoute.isOccupe()) {
             this.alterationVoiture();

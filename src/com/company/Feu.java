@@ -4,26 +4,26 @@ package com.company;
  * Created by axeleroy on 10/12/2014.
  */
 public class Feu {
-    private EtatFeu etat;
+    private boolean etat; // true : rouge ; false : vert
 
-    public Feu(EtatFeu etat) {
+    public Feu(boolean etat) {
         this.etat = etat;
     }
 
-    public EtatFeu getEtat() {
+    public boolean estRouge() {
         return etat;
     }
 
     public void permute() {
-        if (etat.equals(EtatFeu.VERT)) {
-            etat = EtatFeu.ROUGE;
-        } else {
-            etat = EtatFeu.VERT;
-        }
+        etat = !etat;
     }
 
     @Override
     public String toString() {
-        return etat.toString();
+        if(etat) {
+            return "Feu rouge";
+        } else {
+            return "Feu vert";
+        }
     }
 }

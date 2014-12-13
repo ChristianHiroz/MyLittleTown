@@ -20,9 +20,9 @@ public class Intersection {
 
             Feu feu;
             if (i % 2 == 0) {
-                feu = new Feu(EtatFeu.VERT);
+                feu = new Feu(false);
             } else {
-                feu = new Feu(EtatFeu.ROUGE);
+                feu = new Feu(true);
             }
             faces.get(i).getSortie().setFeu(feu);
             g.addFeu(feu);

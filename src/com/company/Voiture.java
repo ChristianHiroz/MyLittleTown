@@ -132,10 +132,12 @@ public class Voiture extends Thread {
             } catch (FeuRougeException fre) {
                 arretVoiture();
                 System.out.println(this.toString() + "... le feu est rouge");
-                while(routeActuelle.isFeuRouge()) {
-                    // attente
+
+                try {
+                    sleep(1000);
+                } catch (InterruptedException ie) {
+                    ie.printStackTrace();
                 }
-                // TODO : relancer la voiture une fois le feu vert
             } catch (InterruptedException e) {
                 System.out.println("Accident ?");
             }

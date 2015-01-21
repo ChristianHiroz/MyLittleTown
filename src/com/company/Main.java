@@ -10,12 +10,12 @@ public class Main {
         GestionnaireFeux gestionnaireFeux = new GestionnaireFeux();
 
         Route r0 = rf.createRoute(5, "Avenue du Lapin Doré");
-        Route r1 = rf.createRoute(5, "Rue du PorteJartelle");
-        Route r2 = rf.createRoute(5, "Chemin de la Fistiniere");
+        Route r1 = rf.createRoute(5, "Rue du Port");
+        Route r2 = rf.createRoute(5, "Chemin du Finistère");
         Route r3 = rf.createRoute(5, "Quai des Dés");
         Route r4 = rf.createRoute(5, "Rue des Chaudières");
         Route r5 = rf.createRoute(5, "Avenue des Granolas");
-        Route r6 = rf.createRoute(5, "Quai du Phalus");
+        Route r6 = rf.createRoute(5, "Quai du Phare");
         Route r7 = rf.createRoute(5, "Chemin de la Fin du Monde");
 
         // Création du premier carré de routes

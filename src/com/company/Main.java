@@ -19,15 +19,15 @@ public class Main {
         Route r7 = rf.createRoute(5, "Chemin de la Fin du Monde");
 
         // Création du premier carré de routes
-        r0.getFace(0).connect(r1.getFace(1));
-        r1.getFace(0).connect(r2.getFace(1));
-        r2.getFace(0).connect(r3.getFace(1));
+        rf.connectRoute(r0, 0, r1, 1);
+        rf.connectRoute(r1, 0, r2, 1);
+        rf.connectRoute(r2, 0, r3, 1);
 
 
         // Création du second carré de routes
-        r4.getFace(0).connect(r5.getFace(1));
-        r5.getFace(0).connect(r6.getFace(1));
-        r6.getFace(0).connect(r7.getFace(1));
+        rf.connectRoute(r4, 0, r5, 1);
+        rf.connectRoute(r5, 0, r6, 1);
+        rf.connectRoute(r6, 0, r7, 1);
 
         // Listing des faces qu'on va lier afin de créer une intersection
         List<Face> faces = new ArrayList<Face>();
@@ -41,7 +41,7 @@ public class Main {
 
         Voiture v0 = new Voiture(r0.getEntree(0), Comportement.CHAUFFARD, "Gerard");
         Voiture v1 = new Voiture(r0.getEntree(0).getSuivants().get(0), Comportement.TOURISTE, "Jacky");
-        Voiture v3 = new Voiture(r4.getEntree(1), Comportement.LIVREUR, "Bernard");
+        Voiture v3 = new Voiture(r4.getEntree(1), "Bernard");
         v0.start();
         v1.start();
         v3.start();

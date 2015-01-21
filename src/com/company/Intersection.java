@@ -6,10 +6,8 @@ import java.util.List;
  * Created by axeleroy on 20/11/2014.
  */
 public class Intersection {
-    private List<Face> faces;
 
-    public Intersection(List<Face> f, GestionnaireFeux g) {
-        faces = f;
+    public static void createIntersection(List<Face> faces, GestionnaireFeux gestionnaireFeux) {
 
         for (int i = 0; i < faces.size(); i++) {
             for (int j = 0; j < faces.size(); j++) {
@@ -25,7 +23,7 @@ public class Intersection {
                 feu = new Feu(true);
             }
             faces.get(i).getSortie().setFeu(feu);
-            g.addFeu(feu);
+            gestionnaireFeux.addFeu(feu);
         }
     }
 }

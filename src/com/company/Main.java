@@ -36,7 +36,7 @@ public class Main {
         faces.add(r4.getFace(1));
         faces.add(r7.getFace(0));
 
-        Intersection i0 = new Intersection(faces, gestionnaireFeux);
+        Intersection.createIntersection(faces, gestionnaireFeux);
         gestionnaireFeux.start();
 
         Voiture v0 = new Voiture(r0.getEntree(0), Comportement.CHAUFFARD, "Gerard");

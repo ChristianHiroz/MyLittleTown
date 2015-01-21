@@ -23,7 +23,6 @@ public class Main {
         rf.connectRoute(r1, 0, r2, 1);
         rf.connectRoute(r2, 0, r3, 1);
 
-
         // Création du second carré de routes
         rf.connectRoute(r4, 0, r5, 1);
         rf.connectRoute(r5, 0, r6, 1);

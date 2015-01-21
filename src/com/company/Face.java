@@ -16,16 +16,8 @@ public class Face {
         return entree;
     }
 
-    public void setEntree(Portion entree) {
-        this.entree = entree;
-    }
-
     public Portion getSortie() {
         return sortie;
-    }
-
-    public void setSortie(Portion sortie) {
-        this.sortie = sortie;
     }
 
     public void connect(Face face){

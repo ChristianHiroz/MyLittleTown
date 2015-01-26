@@ -20,6 +20,7 @@ public class Face {
         return sortie;
     }
 
+    //connecte la phase courante et celle passée en paramètre
     public void connect(Face face){
         face.getSortie().addSuivant(this.getEntree());
         this.getSortie().addSuivant(face.getEntree());

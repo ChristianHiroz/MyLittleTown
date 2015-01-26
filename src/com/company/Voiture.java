@@ -11,12 +11,20 @@ public class Voiture extends Thread {
     //endregion
 
     //region Propriétés
+    
+    //portion sur laquelle se trouve la voiture
     private Portion routeActuelle;
+    //nom du conducteur de la voiture
     private String nomConducteur;
+    // vitesse de la voiture (défaut = 0)
     private int vitesse = 0;
+    // enssence contenu dans le réservoir de la voiture
     private int essence;
+    // liste des différents types de comportements que possède le conducteur
     private ArrayList<Comportement> comportements;
+    // vitesse MAX de la voiture (défaut = 50)
     private int vitesseMax = 50;
+    // accélération par portion de la voiture (défaut = 10)
     private int acceleration = 10;
     //endregion
 
@@ -41,6 +49,8 @@ public class Voiture extends Thread {
     //endregion
 
     //region Getter/Setter
+    
+    // ajoute un comportement à l'automobiliste, ainsi que les particularités du comportement
     public void addComportement(Comportement comportement) {
         if(comportement == Comportement.CHAUFFARD) {
             this.vitesseMax += 20;
@@ -150,10 +160,7 @@ public class Voiture extends Thread {
     }
 
     public synchronized void deplacer() throws PortionOccupedException, FeuRougeException {
-        if (routeActuelle.isFeuRouge()) {
-            throw new FeuRougeException("Le feu est rouge");
-        }
-
+        testFeuRouge();
         Portion prochaineRoute = choisirRoute();
         if (!prochaineRoute.isOccupe()) {
             this.alterationVoiture();
@@ -161,7 +168,12 @@ public class Voiture extends Thread {
         } else {
             throw new PortionOccupedException("La route suivante est occupée");
         }
-        if (this.routeActuelle.isStationService() && this.comportements.contains(Comportement.LIVREUR)) {
+        testLivraison();
+    }
+
+    // test si l'automobiliste a une livraison
+    private void testLivraison(){
+        if (this.routeActuelle.isLieuLivraison() && this.comportements.contains(Comportement.LIVREUR)) {
             try{
                 System.out.println("Livraison en cours");
                 arretVoiture();
@@ -172,7 +184,12 @@ public class Voiture extends Thread {
             }
         }
     }
+    
+    // test s'il y a un feu rouge sur la portion
+    private void testFeuRouge() throws FeuRougeException {
 
+    }
+    
     private void alterationVoiture(){
         augmenterVitesse();
         diminuerEssence();

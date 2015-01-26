@@ -9,7 +9,7 @@ public class PortionOccupedException extends Exception {
     }
 
     public PortionOccupedException(String message) {
-        super(message);
+        super("Portion occupée");
     }
 
     public PortionOccupedException(String message, Throwable cause) {

@@ -9,7 +9,7 @@ public class FinException extends Exception {
     }
 
     public FinException(String message) {
-        super(message);
+        super("Fin");
     }
 
     public FinException(String message, Throwable cause) {

@@ -9,7 +9,7 @@ public class FeuRougeException extends Exception {
     }
 
     public FeuRougeException(String message) {
-        super(message);
+        super("Feu rouge");
     }
 
     public FeuRougeException(String message, Throwable cause) {

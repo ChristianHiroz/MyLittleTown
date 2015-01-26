@@ -9,12 +9,16 @@ import java.util.List;
  */
 public class Portion{
     //region Propriétés
+    
+    // true si une voiture se trouve sur la portion
     private boolean occupe;
+    // portions suivant à cette portion
     private List<Portion> suivants;
+    // elementRoute présent sur cette portion
     private ArrayList<ElementRoute> elements;
+    //
     private String name;
     private int num;
-    private Signalisation signalisation;
     private Feu feu;
     //endregion
 
@@ -70,10 +74,6 @@ public class Portion{
         if(!this.elements.contains(elementRoute)){
             this.elements.add(elementRoute);
         }
-    }
-
-    public void setSignalisation(Signalisation sign) {
-        signalisation = sign;
     }
 
     public ArrayList<ElementRoute> getElements(){
